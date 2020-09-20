@@ -24,6 +24,14 @@ public class Car {
     }
 
     /**
+     * Car Remote method injection
+     * */
+    @Inject
+    public void enableRemote(Remote remote){
+        remote.setListener(this);
+    }
+
+    /**
      * Method to just check if class has been instantiated
      * */
     public void drive(){

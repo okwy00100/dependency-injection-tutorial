@@ -6,9 +6,15 @@ import android.os.Bundle;
 
 import com.okwy.dependencyinjection.model.Car;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Car car;
+    /**
+     * Field injection
+     * */
+    @Inject
+    Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +22,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CarComponent carComponent = DaggerCarComponent.create();
-        car = carComponent.getCar();
+
+        /**
+         * This line of code is used when capitalizing on Constructor injection
+         * */
+        //car = carComponent.getCar();
+
+        /**
+         * This line of code is used when capitalizing on Field injection
+         * */
+        carComponent.inject(this);
+
         car.drive();
 
     }
